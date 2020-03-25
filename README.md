@@ -18,7 +18,7 @@ Optionally, there will be a possibility of ordering the missing ingredients for 
 
 # USERS:
 
-Guest:
+**Guest**:
 - option to look up recipes for a certain number of ingredients
 - can view recipes for which they own the needed ingredients
 - can view recipes where they are missing one or two ingredients
@@ -26,13 +26,13 @@ Guest:
 - sort recipes by appetizers, main meals and deserts; vegetarian options or kids meals
 - possibility of having a randomly chosen recipe
 
-Users:
+**Users**:
 - have a personal account
 - can additionaly leave feedback (as in comments and ratings for each recipe)
 - option to have daily meals and "new meal" updates sent to them via email subscriptions
 - ability to order missing ingredients from a local supermarket
 
-Administrators:
+**Administrator**:
 - approve and delete accounts
 - putting up "Recipes of the day"
 - can insert new recipes and ingredients
