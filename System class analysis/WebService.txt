@@ -1,0 +1,4 @@
+When it comes to web services, we are using RESTful type of web service. This means any data presented on the website is fetched via 
+appropriate web service. For example, if we want to display all recipes, we will make a GET request to RecipeController that will provide us 
+with data containing all recipes, or if we want to update a recipe we will use PUT http method, or if we want to add a new recipe we will use 
+POST http method. The same goes for IngredientController and UserController.
