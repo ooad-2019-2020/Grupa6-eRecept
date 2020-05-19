@@ -1,1 +1,1 @@
-Views have been listed in the Forms folder and these are the current ones we have: CreateAccount, FrontPage, RecipeShow, RecipeSearch, SignIn. They will be using their defined controllers and will be implemented in Angular. If needed, new views can easily be added.
+Views have been listed in the Forms folder and these are the current ones we have: CreateAccount, FrontPage, RecipeShow, RecipeSearch, SignIn. They will be using their defined controllers and will be implemented in Angular. If needed, new views can easily be added. 
