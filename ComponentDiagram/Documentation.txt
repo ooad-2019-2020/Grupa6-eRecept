@@ -1,0 +1,5 @@
+After starting the application, users can log in or register. This will be made possible by the main component. Furthermore, users can also 
+see their saved recipes which will be provided by the user controller. Users can search available recipes by various filters or leave feedback 
+on meals they have made, which will be provided by the component for controlling recipes. If the user is an admin, then additional functions 
+are available such as adding new recipes, modifying existing recipes, account manipulation settings (approving/deleting users). This will be 
+provided by the main component. 
