@@ -9,6 +9,26 @@ namespace eRecept.Repositories
     public class UserRepository
     {
 
+        private static UserRepository instance = null;
+        private static readonly object padlock = new object();
+
+        UserRepository() { }
+
+        public static UserRepository Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new UserRepository();
+                    }
+                    return instance;
+                }
+            }
+        }
+
         public List<User> getAllUsers()
         {
             List<User> returnList = new List<User>();

@@ -17,22 +17,26 @@ namespace eRecept.Controllers
         public List<Recipe> getAllRecipes()
         {
             //TODO: return all recipes
-            return null;
+            List<Recipe> returnList = Repositories.RecipeRepository.Instance.getAllRecipes();
+            return returnList;
         }
 
         public Recipe getRecipe(int id)
         {
             //TODO: return recipe by its id
-            return null;
+            Recipe returnRecipe= Repositories.RecipeRepository.Instance.getRecipe(id);
+            return returnRecipe;
         }
 
         public void deleteRecipe(int id)
         {
+            Repositories.RecipeRepository.Instance.deleteRecipe(id);
             //TODO: delete recipe using its id
         }
 
         public void saveRecipe(Recipe recipe)
         {
+            Repositories.RecipeRepository.Instance.updateRecipe(recipe);
             //TODO: save recipe using its id
         }
 
@@ -40,6 +44,7 @@ namespace eRecept.Controllers
         {
             //TODO: get saved recipes of a specific user
             List<Recipe> returnRecipes = new List<Recipe>();
+            returnRecipes= Repositories.RecipeRepository.Instance.getSavedRecipes(userId);
             return returnRecipes;
         }
 
@@ -49,8 +54,7 @@ namespace eRecept.Controllers
             //TODO: check if user has thhe recipe
             //has-> return 0
             //doesnt-> save it and return 1
-
-            return 0;
+            return Repositories.RecipeRepository.Instance.saveRecipeForUser(userId,recipeId);;
 
         }
 

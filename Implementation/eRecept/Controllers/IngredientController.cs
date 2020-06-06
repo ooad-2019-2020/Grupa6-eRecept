@@ -17,6 +17,7 @@ namespace eRecept.Controllers
         public List<Ingredient> getAllIngredients()
         {
             List<Ingredient> returnList = new List<Ingredient>();
+            returnList = Repositories.IngredientRepository.Instance.getAllIngredients();
             //TODO: return all ingredients
             return returnList;
         }
@@ -24,16 +25,19 @@ namespace eRecept.Controllers
         public Ingredient getIngredient(int ingredientId)
         {
             //TODO: return ingredient by its id
-            return null;
+            Ingredient returnIngredient = Repositories.IngredientRepository.Instance.getIngredient(ingredientId);
+            return returnIngredient;
         }
 
-        public void deleteIngrediant(int ingrediantId)
+        public void deleteIngredient(int ingredientId)
         {
+            Repositories.IngredientRepository.Instance.deleteIngredient(ingredientId);
             //TODO: delete ingredient
         }
 
-        public void saveIngrediant(Ingredient ingredient)
+        public void saveIngredient(Ingredient ingredient)
         {
+            Repositories.IngredientRepository.Instance.updateIngredient(ingredient);
             //TODO: save ingredient
         }
 

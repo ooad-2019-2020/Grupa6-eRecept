@@ -17,6 +17,7 @@ namespace eRecept.Controllers
         public List<User> getAllUsers()
         {
             List<User> returnList = new List<User>();
+            returnList = Repositories.UserRepository.Instance.getAllUsers();
             //TODO: get all users
             return returnList;
         }
@@ -24,16 +25,19 @@ namespace eRecept.Controllers
         public User getUser(int id)
         {
             //TODO: get a user by its id
-            return null;
+            User returnUser = Repositories.UserRepository.Instance.getUser(id);
+            return returnUser;
         }
 
         public void deleteUser(int id)
         {
+             Repositories.UserRepository.Instance.deleteUser(id);
             //TODO: delete a specific user from database
         }
 
         public void saveUser(User user)
         {
+             Repositories.UserRepository.Instance.updateUser(user);
             //TODO: save the user
         }
 

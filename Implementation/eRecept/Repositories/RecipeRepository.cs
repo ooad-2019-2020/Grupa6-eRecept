@@ -9,6 +9,27 @@ namespace eRecept.Repositories
     public class RecipeRepository
     {
 
+        private static RecipeRepository instance=null;
+        private static readonly object padlock = new object();
+
+        RecipeRepository() { }
+
+        public static RecipeRepository Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new RecipeRepository();
+                    }
+                    return instance;
+                }
+            }
+        }
+
+
         public List<Recipe> getAllRecipes()
         {
             //TODO: return all recipes from database
