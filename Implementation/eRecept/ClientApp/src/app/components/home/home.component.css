@@ -1,0 +1,25 @@
+#parent {
+  display: flex;
+  display: inline-block;
+}
+
+.main-recipe {
+  width: 300px;
+  height: 300px;
+  display: inline-block;
+  background: lightblue;
+  margin-left: 40px;
+  margin-right: 40px;
+  border-radius: 25px;
+  /* Just so it's visible */
+}
+.other-recipes {
+  border-radius: 15px;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 20px;
+  /* Just so it's visible */
+}
