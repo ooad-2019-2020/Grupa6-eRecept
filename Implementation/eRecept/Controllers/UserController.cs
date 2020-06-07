@@ -51,7 +51,41 @@ namespace eRecept.Controllers
         }
 
 
+        [HttpPost("login")]
+        public bool CheckUser(string username, string password)
+        {
+            List<User> allUsers = getAllUsers();
 
+            for (int i = 0; i < allUsers.Count(); i++)
+            {
+                if (allUsers[i].Username.Equals(username) && allUsers[i].Password.Equals(password))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        [HttpPost("register")]
+        public bool CheckRegister(string username, string email, string password, string repeatPassword)
+        {
+            List<User> allUsers = getAllUsers();
+
+            for (int i = 0; i < allUsers.Count(); i++)
+            {
+                if (allUsers[i].Username==username)
+                {
+                    //postoji vec jedan sa istim username-om
+                    return false;
+                }
+            }
+
+            if (!password.Equals(repeatPassword)) return false; //ne podudaraju se pass
+
+            _userRepository.insertUser(new User(0, null, null, username, password, email, null, null, 0));
+            return true;
+
+        }
 
 
 

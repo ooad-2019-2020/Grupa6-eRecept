@@ -10,11 +10,13 @@ namespace eRecept.Models
 {
     public class User
     {
-        public User(int userId, string name, string lastName, string mail, string address, string country, int userRole)
+        public User(int userId, string name, string lastName, string username, string password, string mail, string address, string country, int userRole)
         {
             UserId = userId;
             Name = name;
             LastName = lastName;
+            Username = username;
+            Password = password;
             Mail = mail;
             Address = address;
             Country = country;
@@ -29,6 +31,12 @@ namespace eRecept.Models
         [Required]
         [Column(TypeName = "varchar(100)")]
         public string LastName { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(100)")]
+        public string Username { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(100)")]
+        public string Password { get; set; }
         [Required]
         [Column(TypeName = "nvarchar(100)")]
         public string Mail { get; set; }

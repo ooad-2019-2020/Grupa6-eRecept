@@ -9,8 +9,8 @@ using eRecept.Repositories;
 namespace eRecept.Migrations
 {
     [DbContext(typeof(UserRepository))]
-    [Migration("20200607085507_userRepository")]
-    partial class userRepository
+    [Migration("20200607153229_UserMigration")]
+    partial class UserMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,9 +47,17 @@ namespace eRecept.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
                     b.Property<string>("UserRole")
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("UserId");
 

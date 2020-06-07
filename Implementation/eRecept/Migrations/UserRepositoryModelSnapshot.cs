@@ -45,9 +45,17 @@ namespace eRecept.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
                     b.Property<string>("UserRole")
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("UserId");
 
