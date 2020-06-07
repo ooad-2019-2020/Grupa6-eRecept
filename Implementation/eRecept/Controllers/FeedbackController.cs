@@ -43,7 +43,7 @@ namespace eRecept.Controllers
             return _feedbackRepository.getFeedbackForUser(id);
         }
 
-        [HttpGet("submit")]
+        [HttpPost("submit")]
         public void addFeedback(int rating, string comment, int userId, int recipeId)
         {
             Feedback feedback = new Feedback(0,userId,recipeId,rating,comment);
