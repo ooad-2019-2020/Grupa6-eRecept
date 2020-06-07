@@ -13,13 +13,14 @@ namespace eRecept.Models
     {
 
 
-        public Recipe(int id, string title, string description, string mealType, string sideNote)
+        public Recipe(int id, string title, string description, string mealType, string sideNote, string imgUrl)
         {
             Id = id;
             Title = title;
             Description = description;
             MealType = mealType;
             SideNote = sideNote;
+            ImgUrl = imgUrl;
         }
 
 
@@ -29,15 +30,17 @@ namespace eRecept.Models
         [Column(TypeName = "nvarchar(100)")]
         public string Title { get; set; }
         [Required]
-        [Column(TypeName = "nvarchar(100)")]
+        [Column(TypeName = "nvarchar(1028)")]
         public string Description { get; set; }
         [Required]
         [Column(TypeName = "nvarchar(20)")]
         public string MealType { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         public string SideNote { get; set; }
-        
-    
+        [Column(TypeName = "nvarchar(1028)")]
+        public string ImgUrl { get; set; }
+
+
 
     }
 

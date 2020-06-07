@@ -45,6 +45,7 @@ namespace eRecept.Controllers
             return _recipeRepository.getAllRecipes();
         }
 
+        [HttpGet("get")]
         public Recipe getRecipe(int id)
         {
             //TODO: return recipe by its id
@@ -54,13 +55,13 @@ namespace eRecept.Controllers
         [HttpGet("getIngredients")]
         public List<IngredientWrapper> getIngredients(int id=-1)
         {
-            if (id <0) return null;
+            if (id < 0) return null;
 
             List<RecipeIngredient> temp = _recipeIngredientRepository.getAllRecipeIngredients();
             List<IngredientWrapper> returnList = new List<IngredientWrapper>();
 
             foreach (RecipeIngredient rp in temp)
-                if (rp.IngredientId == id) returnList.Add(new IngredientWrapper(_ingredientRepository.getIngredient(rp.IngredientId).Title, rp.Amount));
+                if (rp.RecipeId == id) returnList.Add(new IngredientWrapper(_ingredientRepository.getIngredient(rp.IngredientId).Title, rp.Amount));
 
             return returnList;
 
@@ -107,30 +108,39 @@ namespace eRecept.Controllers
         public void setup()
         {
             //id, title, dect,mealtype, sidenote
-            Recipe r = new Recipe(0,"Soup","Description on how to make this meal goes here","Appetizer","Great with bread");
+            Recipe r = new Recipe(0,"Soup", "Some soups simmer for hours, while others are ready in a half hour or less. Make a big batch of soup and freeze the extra, and you’ll always be minutes away from a delicious meal", "Appetizer","Great with bread", "https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/recipe-image-legacy-id-1074500_11.jpg");
             this.saveRecipe(r);
             this.addIngredient(r.Id,_ingredientRepository.getIngredient("Meat").Id,1);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Eggs").Id, 1);
 
-            r = new Recipe(0, "Fish", "Description on how to make this meal goes here", "MainCourse", "Watch out for bones");
+            r = new Recipe(0, "Fish", "Fish is a great meal for main course, quick to make, tasty and healthiest meat", "MainCourse", "Watch out for bones", "https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/baked-piri-piri-tilapia-with-crushed-potatoes.jpg");
             this.saveRecipe(r);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Meat").Id, 2);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Fish").Id, 1);
 
-            r = new Recipe(0, "Cake", "Description on how to make this meal goes here", "Dessert", "Little more vanila extract for the flavor");
+            r = new Recipe(0, "Cake", "Kids love cake so if you have kids make one they'll go crazy about it", "Dessert", "Little more vanila extract for the flavor", "https://www.handletheheat.com/wp-content/uploads/2015/03/Best-Birthday-Cake-with-milk-chocolate-buttercream-SQUARE.jpg");
             this.saveRecipe(r);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Milk").Id, 1);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Eggs").Id, 1);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Chocolate").Id, 1);
 
-            r=new Recipe(0, " Cheeseburger", "Description on how to make this meal goes here","MainCourse","Beeschusger");
+            r = new Recipe(0, "Cheeseburger", "Beesechurger is a great meal for memers", "MainCourse", "Beeschusger", "https://i.kym-cdn.com/photos/images/original/001/404/055/8f5.jpg");
             this.saveRecipe(r);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Cheese").Id, 2);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Ketchup").Id, 1);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Bread").Id, 2);
 
+            r = new Recipe(0, "Beans", "Bosnians always love to eat beans", "MainCourse", "Beans", "https://img.24sata.hr/GJ56oBVA_eMw50OaVQHTViSldrw=/540x0/smart/media/images/src/20130100/8381a0a7efc24a38099bc79563205cab.jpg");
+            this.saveRecipe(r);
+            this.addIngredient(r.Id, _ingredientRepository.getIngredient("Cheese").Id, 2);
+            this.addIngredient(r.Id, _ingredientRepository.getIngredient("Ketchup").Id, 1);
+            this.addIngredient(r.Id, _ingredientRepository.getIngredient("Bread").Id, 2);
 
-
+            r = new Recipe(0, "Pizza", "A dish made typically of flattened bread dough spread with a savory mixture usually including tomatoes and cheese and often other toppings and baked", "MainCourse", "Is junk food", "https://radiokameleon.ba/wp-content/uploads/2020/01/pizzaaa.jpg");
+            this.saveRecipe(r);
+            this.addIngredient(r.Id, _ingredientRepository.getIngredient("Cheese").Id, 2);
+            this.addIngredient(r.Id, _ingredientRepository.getIngredient("Ketchup").Id, 1);
+            this.addIngredient(r.Id, _ingredientRepository.getIngredient("Bread").Id, 2);
         }
 
         [HttpGet("getDaily")]

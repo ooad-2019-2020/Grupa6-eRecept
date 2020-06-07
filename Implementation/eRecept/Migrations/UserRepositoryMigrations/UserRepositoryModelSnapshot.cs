@@ -2,17 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eRecept.Repositories;
 
-namespace eRecept.Migrations
+namespace eRecept.Migrations.UserRepositoryMigrations
 {
     [DbContext(typeof(UserRepository))]
-    [Migration("20200607160307_UserMigration2")]
-    partial class UserMigration2
+    partial class UserRepositoryModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -53,7 +53,7 @@ namespace eRecept.Controllers
 
 
         [HttpPost("login")]
-        public bool CheckUser(string username, string password)
+        public int CheckUser(string username, string password)
         {
             List<User> allUsers = getAllUsers();
 
@@ -61,10 +61,10 @@ namespace eRecept.Controllers
             {
                 if (allUsers[i].Username.Equals(username) && allUsers[i].Password.Equals(password))
                 {
-                    return true;
+                    return allUsers[i].UserId;
                 }
             }
-            return false;
+            return -1;
         }
 
         [HttpPost("register")]

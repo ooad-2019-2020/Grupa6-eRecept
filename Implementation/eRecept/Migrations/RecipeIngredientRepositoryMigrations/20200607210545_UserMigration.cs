@@ -2,7 +2,7 @@
 
 namespace eRecept.Migrations.RecipeIngredientRepositoryMigrations
 {
-    public partial class RecipeIngredient : Migration
+    public partial class UserMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

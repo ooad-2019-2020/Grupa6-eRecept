@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eRecept.Repositories;
 
-namespace eRecept.Migrations.IngredientRepositoryMigrations
+namespace eRecept.Migrations
 {
-    [DbContext(typeof(IngredientRepository))]
-    [Migration("20200607085948_ingredientRepository")]
-    partial class ingredientRepository
+    [DbContext(typeof(RecipeRepository))]
+    [Migration("20200607210521_UserMigration")]
+    partial class UserMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,24 +20,34 @@ namespace eRecept.Migrations.IngredientRepositoryMigrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("eRecept.Models.Ingredient", b =>
+            modelBuilder.Entity("eRecept.Models.Recipe", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Amount")
+                    b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("varchar(5)");
+                        .HasColumnType("nvarchar(1028)");
+
+                    b.Property<string>("ImgUrl")
+                        .HasColumnType("nvarchar(1028)");
+
+                    b.Property<string>("MealType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("SideNote")
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ingredients");
+                    b.ToTable("Recipes");
                 });
 #pragma warning restore 612, 618
         }

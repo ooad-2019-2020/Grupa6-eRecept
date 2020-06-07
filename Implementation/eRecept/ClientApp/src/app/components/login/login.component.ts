@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
+    console.log(this.loginForm.invalid);
     this.submitted = true;
 
     // reset alerts on submit
@@ -55,9 +56,10 @@ export class LoginComponent implements OnInit {
     this.httpClient
       .post(url, null)
       .subscribe(
-        (data: boolean) => {
-          this.authGuardService.isLoggedIn = data;
-          if (data === true) {
+        (data: number) => {
+          if (data > 0) {
+            this.authGuardService.isLoggedIn = true;
+            this.authGuardService.userId = data;
             this.router.navigate([""]);
           }
           this.loading = false;

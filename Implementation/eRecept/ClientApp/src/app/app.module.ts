@@ -22,6 +22,8 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { SearchComponent } from './components/search/search.component';
 import { RecipeinfoComponent } from './components/recipeinfo/recipeinfo.component';
 import { MatSelectModule } from '@angular/material';
+import { StarRatingModule } from 'angular-star-rating';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { MatSelectModule } from '@angular/material';
     HttpClientModule,
     FormsModule,
     MatListModule,
+    StarRatingModule.forRoot(),
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,

@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eRecept.Repositories;
 
-namespace eRecept.Migrations.RecipeIngredientRepositoryMigrations
+namespace eRecept.Migrations.IngredientRepositoryMigrations
 {
-    [DbContext(typeof(RecipeIngredientRepository))]
-    [Migration("20200607141843_RecipeIngredient")]
-    partial class RecipeIngredient
+    [DbContext(typeof(IngredientRepository))]
+    [Migration("20200607210529_UserMigration")]
+    partial class UserMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,7 +20,7 @@ namespace eRecept.Migrations.RecipeIngredientRepositoryMigrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("eRecept.Models.RecipeIngredient", b =>
+            modelBuilder.Entity("eRecept.Models.Ingredient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,19 +29,15 @@ namespace eRecept.Migrations.RecipeIngredientRepositoryMigrations
 
                     b.Property<string>("Amount")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("varchar(5)");
 
-                    b.Property<string>("IngredientId")
+                    b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("RecipeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("RecipeIngredients");
+                    b.ToTable("Ingredients");
                 });
 #pragma warning restore 612, 618
         }

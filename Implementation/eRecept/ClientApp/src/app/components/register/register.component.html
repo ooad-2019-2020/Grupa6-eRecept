@@ -1,12 +1,12 @@
 
-<div style="position:relative; margin-left:10%; width: 50%; text-align: center; margin-left: 30% ">
-  <h1>Register</h1>
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div style="position:relative; margin-left:10%; width: 50%; text-align: center; margin-left: 30% ">
+    <h1>Register</h1>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <!--<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
@@ -42,5 +42,38 @@
       </button>
       <a routerLink="/login" class="btn btn-link">Login</a>
     </div>
-  </form>
-</div>
+  </form>-->
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div>
+        <mat-form-field appearance="fill" style="width:50%">
+          <mat-label>Username</mat-label>
+          <input matInput type="text" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" style="width:50%">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" style="width:50%">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" style="width:50%">
+          <mat-label>Repeat password</mat-label>
+          <input matInput type="password" formControlName="repeatpassword" [ngClass]="{ 'is-invalid': submitted && f.repeatpassword.errors }">
+        </mat-form-field>
+        <br>
+
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Registerdas
+        </button>
+        <a routerLink="/login" class="btn btn-link">Login</a>
+      </div>
+    </form>
+  </div>

@@ -1,14 +1,17 @@
+
 <div style="position:relative; margin-left:10%; text-align: center; margin-top:5%">
   <div id="parent">
-    <div style="cursor: pointer;" class="main-recipe" (click)="onClick(dailyrecipe.id)" [ngStyle]="{'text-align': '-webkit-center', 'background': 'url(' + dailyrecipe.imgUrl + ')', 'background-size': '300px 300px'}">
+    <div style="cursor: pointer;" class="main-recipe" (click)="onClick(dailyrecipe.id)" [ngStyle]="{'text-align': '-webkit-center','background-size': '300px 300px !important', 'background': 'url(' + dailyrecipe.imgUrl + ')'}">
       <div style="background-color: rgb(255, 255, 255, 0.7); margin-top: 200px; width:100px; word-break:break-all; align-self: center; border-radius: 5px;">
-      <h1>{{dailyrecipe.name}}</h1></div>
+        <h1>{{dailyrecipe.name}}</h1>
+      </div>
     </div>
-    <div style="cursor: pointer; " class="main-recipe" (click)="onClick(bestrecipe.id)" [ngStyle]="{'text-align': '-webkit-center', 'background': 'url(' + bestrecipe.imgUrl + ')', 'background-size': '300px 300px'}">
+    <div style="cursor: pointer; " class="main-recipe" (click)="onClick(bestrecipe.id)" [ngStyle]="{'text-align': '-webkit-center', 'background-size': '300px 300px !important', 'background': 'url(' + bestrecipe.imgUrl + ')'}">
       <div style="background-color: rgb(255, 255, 255, 0.7); margin-top: 200px; width:100px; word-break:break-all; align-self: center; border-radius: 5px;">
-      <h1>{{bestrecipe.name}}</h1></div>
+        <h1>{{bestrecipe.name}}</h1>
+      </div>
     </div>
-  </div>
+  </div>  
   <div style="margin-top: 50px">
     <h2>Other recipes:</h2>
     <br />
@@ -21,3 +24,4 @@
     </div>
   </div>
 </div>
+

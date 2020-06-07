@@ -2,15 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 class Recipe {
   private id: number;
-  private name: string;
-  private imgUrl: string;
+  private title: string;
+  private description: string;
+  private mealType: string;
+  private sideNote: string;
+  public imgUrl: string;
 
-  constructor(id, name, imgUrl) {
+  constructor(id, title, description, mealType, sideNote, imgUrl) {
     this.id = id;
-    this.name = name;
+    this.title = title;
+    this.description = description;
+    this.mealType = mealType;
+    this.sideNote = sideNote;
     this.imgUrl = imgUrl;
   }
 }
@@ -22,17 +29,11 @@ class Recipe {
 })
 export class HomeComponent implements OnInit {
   options: FormGroup;
-  recipes: Recipe[] = [
-    new Recipe(0, "Bla1", "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-190611-mandarin-orange-salad-281-landscape-pf-1561556605.png"),
-    new Recipe(1, "Bla2", "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-190611-mandarin-orange-salad-281-landscape-pf-1561556605.png"),
-    new Recipe(2, "Bla3", "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-190611-mandarin-orange-salad-281-landscape-pf-1561556605.png"),
-    new Recipe(3, "Bla4", "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-190611-mandarin-orange-salad-281-landscape-pf-1561556605.png"),
-    new Recipe(4, "Bla5", "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-190611-mandarin-orange-salad-281-landscape-pf-1561556605.png"),
-    new Recipe(5, "Bla6", "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-190611-mandarin-orange-salad-281-landscape-pf-1561556605.png")];
-  dailyrecipe: Recipe = new Recipe(0, "Bla1", "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-190611-mandarin-orange-salad-281-landscape-pf-1561556605.png");
-  bestrecipe: Recipe = new Recipe(0, "Bla1", "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-190611-mandarin-orange-salad-281-landscape-pf-1561556605.png");
-
-  constructor(fb: FormBuilder, private dataService: DataService, private router: Router) {
+  recipes: Recipe[] = [];
+  dailyrecipe: Recipe = new Recipe(null, null, null, null, null, null);
+  bestrecipe: Recipe = new Recipe(null, null, null, null, null, null);
+  
+  constructor(fb: FormBuilder, private dataService: DataService, private router: Router, private httpClient: HttpClient) {
 
     this.options = fb.group({
       bottom: 0,
@@ -43,8 +44,32 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     //get daily
+    this.httpClient.get("http://localhost:51943/recipe/getDaily")
+      .subscribe(
+        (data: Recipe) => {
+          this.dailyrecipe = data;
+        },
+        error => {
+          console.log(error);
+        });
     //get best
-    //get all
+    this.httpClient.get("http://localhost:51943/recipe/getBest")
+      .subscribe(
+        (data: Recipe) => {
+          this.bestrecipe = data;
+        },
+        error => {
+          console.log(error);
+        });
+    //getall
+    this.httpClient.get("http://localhost:51943/recipe")
+      .subscribe(
+        (data: Recipe[]) => {
+          this.recipes = data;
+        },
+        error => {
+          console.log(error);
+        }); 
   }
 
   onClick(id: number) {

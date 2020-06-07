@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { HttpClient } from '@angular/common/http';
+import { AuthGuardService } from '../../services/auth-guard.service';
 
 class Ingredient {
   private id: number;
-  private title: string;
+  private name: string;
   private amount: number;
 
-  constructor(id, title, amount) {
+  constructor(id, name, amount) {
     this.id = id;
-    this.title = title;
+    this.name = name;
     this.amount = amount;
   }
 }
@@ -41,35 +42,48 @@ class Recipe {
   styleUrls: ['./recipeinfo.component.css']
 })
 export class RecipeinfoComponent implements OnInit {
-
+  @Input() rating: number;
+  @Input() itemId: number;
+  @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
+  private feedbackMessage: string;
   private recipe: Recipe;
 
-  constructor(private router: Router, private dataService: DataService, private httpClient: HttpClient) { }
+  constructor(private router: Router, private dataService: DataService, private httpClient: HttpClient, private authGuardService: AuthGuardService) { }
 
   ngOnInit() {
 
     if (this.dataService.recipeId === -1 || this.dataService.recipeId === undefined) this.router.navigate([""]);
 
-
-
-    this.httpClient.get("/recipe/get?id=" + this.dataService.recipeId)
+    this.httpClient.get("http://localhost:51943/recipe/get?id=" + this.dataService.recipeId)
       .subscribe(
-        data => {
-          this.recipe = new Recipe(data['id'], data['title'], data['description'], data['mealType'], data['sideNote'], data['imgUrl']);
+        (data: Recipe) => {
+          this.recipe = data;
+
         },
         error => {
           console.log(error);
         });
 
-    this.httpClient.get("/recipe/getIngredients?id=" + this.dataService.recipeId)
+    this.httpClient.get("http://localhost:51943/recipe/getIngredients?id=" + this.dataService.recipeId)
       .subscribe(
-        data => {
-          this.recipe.ingredients = data['ingredients'];
+        (data: Ingredient[])=> {
+          this.recipe.ingredients = data;
         },
         error => {
           console.log(error);
         }); 
-
+  }
+  onClick(rating: number): void {
+    this.rating = rating;
+    this.ratingClick.emit({
+      itemId: this.itemId,
+      rating: rating
+    });
   }
 
+  onSubmitFeedback() {
+    //POZVATI FEEDBACK BACKEND
+    const url = "http://localhost:51943/feedback/submit?rating=" + this.rating + "&comment=" + this.feedbackMessage + "&userId=" + this.authGuardService.userId + "&recipeId=" + this.dataService.recipeId;
+    this.httpClient.post(url, null).subscribe(data => { console.log("Success!"); }, error => { console.log("Error"); });
+  }
 }

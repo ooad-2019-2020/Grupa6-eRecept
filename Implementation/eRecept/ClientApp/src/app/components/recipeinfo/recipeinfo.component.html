@@ -1,3 +1,40 @@
-<div style="position:relative; margin-left:10%">
+<div style="position:relative; margin-left:10%; text-align: -webkit-center;">
+  <div style=" margin-top: 5%">
+    <h1>{{this.recipe.title}}</h1>
+  </div>
+  <div style="width:50%;  text-align: left">
+    <h2>Description: </h2>{{this.recipe.description}}
+    <h2>Meal Type: </h2>{{this.recipe.mealType}}
+    <h2>Side Note: </h2>{{this.recipe.sideNote}}
+    <h2>Ingredients: </h2>
+    <span *ngFor="let ingredient of this.recipe.ingredients">{{ingredient.name}} x {{ingredient.amount}}<br /> </span>
+    <h2>Image: </h2>
+  </div>
+  <img [src]="this.recipe.imgUrl" style="width: 40%; border-radius: 20px" />
 
+  <div style="width:50%;  text-align: left">
+    <h2>Feedback: </h2>
+    <fieldset class="rating">
+      <input type="radio" [name]="inputName" value="5" [checked]="rating===5" />
+      <label title="Rocks!" (click)='onClick(5)'>5 stars</label>
+
+      <input type="radio" [name]="inputName" value="4" [checked]="rating===4" />
+      <label title="Pretty good" (click)='onClick(4)'>4 stars</label>
+
+      <input type="radio" [name]="inputName" value="3" [checked]="rating===3" />
+      <label title="Meh" (click)='onClick(3)'>3 stars</label>
+
+      <input type="radio" [name]="inputName" value="2" [checked]="rating===2" />
+      <label title="Kinda bad" (click)='onClick(2)'>2 stars</label>
+
+      <input type="radio" [name]="inputName" value="1" [checked]="rating===1" />
+      <label title="Sucks big time" (click)='onClick(1)'>1 star</label>
+    </fieldset>
+    <mat-form-field class="example-form-field" style="margin-left: 20px">
+      <mat-label>Message</mat-label>
+      <input matInput type="text" [(ngModel)]="feedbackMessage">
+    </mat-form-field>
+    <button class="btn btn-primary" style="float:right" (click)="onSubmitFeedback()">Submit</button>
+
+  </div>
 </div>

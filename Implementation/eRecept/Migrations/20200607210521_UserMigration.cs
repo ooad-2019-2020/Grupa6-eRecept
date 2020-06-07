@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace eRecept.Migrations.RecipeRepositoryMigrations
+namespace eRecept.Migrations
 {
-    public partial class recipeRepository : Migration
+    public partial class UserMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,9 +13,10 @@ namespace eRecept.Migrations.RecipeRepositoryMigrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1028)", nullable: false),
                     MealType = table.Column<string>(type: "nvarchar(20)", nullable: false),
-                    SideNote = table.Column<string>(type: "nvarchar(100)", nullable: true)
+                    SideNote = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    ImgUrl = table.Column<string>(type: "nvarchar(1028)", nullable: true)
                 },
                 constraints: table =>
                 {
