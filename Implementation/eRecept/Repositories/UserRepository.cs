@@ -36,6 +36,7 @@ namespace eRecept.Repositories
         {
 
             this.Add(user);
+            this.SaveChanges();
             //TODO: insert a user to the database
         }
 
