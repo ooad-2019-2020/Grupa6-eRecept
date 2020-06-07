@@ -88,6 +88,19 @@ namespace eRecept.Controllers
 
         }
 
+        [HttpGet("setup")]
+        public void setup()
+        {
+            User u = new User(0, "Jasmin", "Dudic", "dudaMaister", "77953ftw", "duderino@gmail.com", "Barnjace 19", "Bosna", 1);
+            
+            this.saveUser(u);
+            u = new User(0, "Edis", "Krsmanovic", "diseTebra", "mojpwnikonecepogoditi", "edisek@yahoo.com", "Erbolija 553d", "Bosna", 1);
+            this.saveUser(u);
+            u = new User(0, "Kanica", "Dervic", "birblover", "himzo123", "kenchi@hotmail.com", "Pticnjak 05", "Bosna", 1);
+            this.saveUser(u);
+
+        }
+
 
 
 

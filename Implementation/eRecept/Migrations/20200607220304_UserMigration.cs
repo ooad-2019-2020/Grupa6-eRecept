@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace eRecept.Migrations.RecipeIngredientRepositoryMigrations
+namespace eRecept.Migrations
 {
     public partial class UserMigration : Migration
     {

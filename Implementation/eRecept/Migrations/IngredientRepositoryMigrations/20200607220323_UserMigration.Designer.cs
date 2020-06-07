@@ -9,7 +9,7 @@ using eRecept.Repositories;
 namespace eRecept.Migrations.IngredientRepositoryMigrations
 {
     [DbContext(typeof(IngredientRepository))]
-    [Migration("20200607210529_UserMigration")]
+    [Migration("20200607220323_UserMigration")]
     partial class UserMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

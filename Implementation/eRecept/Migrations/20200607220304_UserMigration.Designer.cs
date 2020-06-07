@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eRecept.Repositories;
 
-namespace eRecept.Migrations.UserRepositoryMigrations
+namespace eRecept.Migrations
 {
-    [DbContext(typeof(UserRepository))]
-    [Migration("20200607210537_UserMigration")]
+    [DbContext(typeof(RecipeIngredientRepository))]
+    [Migration("20200607220304_UserMigration")]
     partial class UserMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,44 +20,28 @@ namespace eRecept.Migrations.UserRepositoryMigrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("eRecept.Models.User", b =>
+            modelBuilder.Entity("eRecept.Models.RecipeIngredient", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Mail")
+                    b.Property<string>("Amount")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Password")
+                    b.Property<string>("IngredientId")
                         .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("UserRole")
+                    b.Property<string>("RecipeId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
+                    b.HasKey("Id");
 
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
+                    b.ToTable("RecipeIngredients");
                 });
 #pragma warning restore 612, 618
         }

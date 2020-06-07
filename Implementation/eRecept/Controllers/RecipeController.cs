@@ -22,12 +22,18 @@ namespace eRecept.Controllers
         private readonly RecipeRepository _recipeRepository;
         private readonly RecipeIngredientRepository _recipeIngredientRepository;
         private readonly IngredientRepository _ingredientRepository;
+        private readonly SavedRecipesRepository _savedRecipes;
+        private readonly UserRepository _users;
+        private readonly FeedbackRepository _feedback;
 
-        public RecipeController(RecipeRepository recipeRepository, RecipeIngredientRepository recipeIngredientRepository, IngredientRepository ingredientRepository)
+        public RecipeController(RecipeRepository recipeRepository, RecipeIngredientRepository recipeIngredientRepository, IngredientRepository ingredientRepository, SavedRecipesRepository savedRecipes, UserRepository users, FeedbackRepository feedback)
         {
             _recipeRepository = recipeRepository;
             _recipeIngredientRepository = recipeIngredientRepository;
             _ingredientRepository = ingredientRepository;
+            _savedRecipes = savedRecipes;
+            _users = users;
+            _feedback = feedback;
         }
 
     
@@ -79,15 +85,28 @@ namespace eRecept.Controllers
             _recipeRepository.insertRecipe(recipe);
         }
 
+        [HttpGet("saved")]
         public List<Recipe> getSavedRecipes(int userId)
         {
-            //TODO: get saved recipes of a specific user
-            // _recipeRepository.deleteRecipe(id);
-            return null;
+
+
+            List<SavedRecipes> tempList= _savedRecipes.getAllRecipeIngredients();
+
+            List<Recipe> returnList = new List<Recipe>();
+
+            foreach(SavedRecipes sr in tempList)
+            {
+                returnList.Add(getRecipe(sr.RecipeId));
+            }
+            return returnList;
+
         }
 
+        [HttpGet("save")]
         public int saveRecipeForUser(int userId, int recipeId)
         {
+            //todo use local userid variable
+            _savedRecipes.saveRecipe(new SavedRecipes(0,userId, recipeId));
             return 0;
         }
 
@@ -136,11 +155,6 @@ namespace eRecept.Controllers
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Ketchup").Id, 1);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Bread").Id, 2);
 
-            r = new Recipe(0, "Pizza", "A dish made typically of flattened bread dough spread with a savory mixture usually including tomatoes and cheese and often other toppings and baked", "MainCourse", "Is junk food", "https://radiokameleon.ba/wp-content/uploads/2020/01/pizzaaa.jpg");
-            this.saveRecipe(r);
-            this.addIngredient(r.Id, _ingredientRepository.getIngredient("Cheese").Id, 2);
-            this.addIngredient(r.Id, _ingredientRepository.getIngredient("Ketchup").Id, 1);
-            this.addIngredient(r.Id, _ingredientRepository.getIngredient("Bread").Id, 2);
         }
 
         [HttpGet("getDaily")]
