@@ -44,6 +44,7 @@ namespace eRecept.Repositories
         {
 
             this.Feedbacks.Add(feedback);
+            this.SaveChanges();
 
         }
 

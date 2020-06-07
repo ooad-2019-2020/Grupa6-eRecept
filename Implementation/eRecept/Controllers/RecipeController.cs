@@ -21,13 +21,17 @@ namespace eRecept.Controllers
         private readonly RecipeIngredientRepository _recipeIngredientRepository;
         private readonly IngredientRepository _ingredientRepository;
         private readonly SavedRecipesRepository _savedRecipes;
+        private readonly UserRepository _users;
+        private readonly FeedbackRepository _feedback;
 
-        public RecipeController(RecipeRepository recipeRepository, RecipeIngredientRepository recipeIngredientRepository, IngredientRepository ingredientRepository, SavedRecipesRepository savedRecipes)
+        public RecipeController(RecipeRepository recipeRepository, RecipeIngredientRepository recipeIngredientRepository, IngredientRepository ingredientRepository, SavedRecipesRepository savedRecipes, UserRepository users, FeedbackRepository feedback)
         {
             _recipeRepository = recipeRepository;
             _recipeIngredientRepository = recipeIngredientRepository;
             _ingredientRepository = ingredientRepository;
             _savedRecipes = savedRecipes;
+            _users = users;
+            _feedback = feedback;
         }
 
     
@@ -78,6 +82,7 @@ namespace eRecept.Controllers
             _recipeRepository.insertRecipe(recipe);
         }
 
+        [HttpGet("saved")]
         public List<Recipe> getSavedRecipes(int userId)
         {
 
@@ -140,6 +145,27 @@ namespace eRecept.Controllers
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Cheese").Id, 2);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Ketchup").Id, 1);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Bread").Id, 2);
+
+
+            List<User> users = new List<User>();
+            users = _users.getAllUsers();
+            List<Recipe> recipes = _recipeRepository.getAllRecipes();
+           
+            Random rnd = new Random();
+
+            for (int i = 0; i < 3; i++)
+            {
+                SavedRecipes sr = new SavedRecipes(0, users[rnd.Next(users.Count)].UserId, recipes[rnd.Next(recipes.Count)].Id);
+                _savedRecipes.saveRecipe(sr);
+            }
+
+            
+                Feedback fb = new Feedback(0, 1, recipes[rnd.Next(recipes.Count)].Id,rnd.Next(5),"Testing comment "+rnd.Next(70));
+                _feedback.addFeedback(fb);
+                fb = new Feedback(0, 2, recipes[rnd.Next(recipes.Count)].Id, rnd.Next(5), "Testing comment " + rnd.Next(70));
+                _feedback.addFeedback(fb);
+                fb = new Feedback(0, 3, recipes[rnd.Next(recipes.Count)].Id, rnd.Next(5), "Testing comment " + rnd.Next(70));
+                _feedback.addFeedback(fb);
 
 
 
