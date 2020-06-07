@@ -28,9 +28,13 @@ namespace eRecept.Controllers
         }
 
         [HttpGet("recipe")]
-        public List<Feedback> getFeedbackForRecipe(int id)
+        public double getFeedbackForRecipe(int id)
         {
-            return _feedbackRepository.getFeedbackForRecipe(id);
+            List<Feedback>list= _feedbackRepository.getFeedbackForRecipe(id);
+            if (list.Count == 0) return 0;
+            double sum = 0;
+            foreach (Feedback feedback in list) sum += feedback.Rating;
+            return sum / list.Count;
         }
 
         [HttpGet("user")]
@@ -39,10 +43,10 @@ namespace eRecept.Controllers
             return _feedbackRepository.getFeedbackForUser(id);
         }
 
-        [HttpGet("add")]
-        public void addFeedback(Feedback feedback)
+        [HttpGet("submit")]
+        public void addFeedback(int rating, string comment, int userId, int recipeId)
         {
-
+            Feedback feedback = new Feedback(0,userId,recipeId,rating,comment);
             _feedbackRepository.addFeedback(feedback);
 
         }
