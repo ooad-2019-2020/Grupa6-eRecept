@@ -14,6 +14,8 @@ namespace eRecept.Repositories
         {
         }
 
+        IngredientRepository() { }
+
         public DbSet<Ingredient> Ingredients { get; set; }
 
 

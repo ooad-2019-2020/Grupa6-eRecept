@@ -11,14 +11,22 @@ namespace eRecept.Models
     public class RecipeIngredient
     {
 
+
+        public RecipeIngredient(int id,int recipeId,int ingredientId)
+        {
+            Id = id;
+            RecipeId = recipeId;
+            IngredientId = ingredientId;
+        }
+
         [Key]
         public int Id { get; set; }
         [Required]
         [Column(TypeName = "nvarchar(100)")]
-        public string recipeId { get; set; }
+        public int RecipeId { get; set; }
         [Required]
         [Column(TypeName = "nvarchar(100)")]
-        public string ingredientId { get; set; }
+        public int IngredientId { get; set; }
   
 
     }

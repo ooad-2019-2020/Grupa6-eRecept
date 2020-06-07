@@ -42,9 +42,10 @@ namespace eRecept
             services.AddDbContext<Repositories.RecipeRepository>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DevConnection1")));
 
+            services.AddDbContext<Repositories.RecipeIngredientRepository>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DevConnection1")));
 
 
-          
 
         }
 

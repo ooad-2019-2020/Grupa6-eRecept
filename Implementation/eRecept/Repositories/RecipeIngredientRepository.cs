@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace eRecept.Repositories
 {
 
-    [System.ComponentModel.DataAnnotations.Schema.Table("RecipeIngredient")]
+    [System.ComponentModel.DataAnnotations.Schema.Table("RecipeIngredients")]
     public class RecipeIngredientRepository:DbContext
     {
 
@@ -16,11 +16,13 @@ namespace eRecept.Repositories
         {
         }
 
-        public DbSet<RecipeIngredientRepository> RecipeIngredients { get; set; }
+       // RecipeIngredientRepository() { }
 
-        public List<RecipeIngredientRepository> getAllRecipeIngredients()
+        public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
+
+        public List<RecipeIngredient> getAllRecipeIngredients()
         {
-            return new List<RecipeIngredientRepository>(this.RecipeIngredients);
+            return new List<RecipeIngredient>(this.RecipeIngredients);
         }
 
         public List<RecipeIngredientWrapper> getAllRecipesWithIngredients(List<Ingredient> ingredients)
@@ -30,6 +32,22 @@ namespace eRecept.Repositories
           //  this.RecipeIngredients.FromSqlRaw
 
             return null;
+        }
+
+        public void addRecipeIngredient(RecipeIngredient recipeIngredient)
+        {
+
+            this.Add(recipeIngredient);
+            this.SaveChanges();
+
+        }
+
+        public void removeRecipe(int recipeId)
+        {
+
+            this.RecipeIngredients.FromSqlRaw("Delete from RecipeIngredients where recipeId="+recipeId,null);
+            this.SaveChanges();
+
         }
 
 

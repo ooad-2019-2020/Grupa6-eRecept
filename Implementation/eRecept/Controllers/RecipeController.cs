@@ -16,11 +16,16 @@ namespace eRecept.Controllers
 
 
         private readonly RecipeRepository _recipeRepository;
+        private readonly RecipeIngredientRepository _recipeIngredientRepository;
 
-        public RecipeController(RecipeRepository recipeRepository)
+        public RecipeController(RecipeRepository recipeRepository, RecipeIngredientRepository recipeIngredientRepository)
         {
             _recipeRepository = recipeRepository;
+            _recipeIngredientRepository = recipeIngredientRepository;
         }
+
+    
+
 
         public IActionResult Index()
         {
@@ -66,6 +71,7 @@ namespace eRecept.Controllers
 
         public int addIngredient(int recipeId, int ingredientId)
         {
+            _recipeIngredientRepository.addRecipeIngredient(new RecipeIngredient(0,recipeId,ingredientId));
             return 0;
         }
 
@@ -87,11 +93,7 @@ namespace eRecept.Controllers
              r = new Recipe(0, "Cake", "Description on how to make this meal goes here", "Dessert", "Little more vanila extract for the flavor");
             this.saveRecipe(r);
 
-            /* r = new Recipe(0, "Soup", "Description on how to make this meal goes here", "Appetizer", "Great with bread");
-            this.saveRecipe(r);
-
-             r = new Recipe(0, "Soup", "Description on how to make this meal goes here", "Appetizer", "Great with bread");
-            this.saveRecipe(r);*/
+          
 
         }
 

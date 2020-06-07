@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eRecept.Controllers
 {
+    [Route("[controller]")]
+    [ApiController]
     public class RecipeIngredientController : Controller
     {
         private readonly RecipeIngredientRepository _recipeIngredientRepository;
@@ -22,7 +24,8 @@ namespace eRecept.Controllers
             return View();
         }
 
-        public List<RecipeIngredientRepository> getAllRecipeIngredients()
+        [HttpGet]
+        public List<RecipeIngredient> getAllRecipeIngredients()
         {
             return _recipeIngredientRepository.getAllRecipeIngredients();
         }

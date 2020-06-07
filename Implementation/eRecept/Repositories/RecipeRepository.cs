@@ -33,6 +33,7 @@ namespace eRecept.Repositories
         {
 
             this.Add(recipe);
+            this.SaveChanges();
 
             //TODO: insert recipe into the database
         }
@@ -40,12 +41,14 @@ namespace eRecept.Repositories
         public void deleteRecipe(int id)
         {
             this.Remove(id);
+            this.SaveChanges();
             //TODO: delete recipe from database using its id
         }
 
         public void updateRecipe(Recipe recipe)
         {
             this.Update(recipe);
+            this.SaveChanges();
             //TODO: update recipe using its id
         }
 
