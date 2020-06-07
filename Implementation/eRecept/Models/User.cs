@@ -25,10 +25,8 @@ namespace eRecept.Models
         }
         [Key]
         public int UserId { get; set; }
-        [Required]
         [Column(TypeName = "varchar(100)")]
         public string Name { get; set; }
-        [Required]
         [Column(TypeName = "varchar(100)")]
         public string LastName { get; set; }
         [Required]
@@ -40,10 +38,8 @@ namespace eRecept.Models
         [Required]
         [Column(TypeName = "nvarchar(100)")]
         public string Mail { get; set; }
-        [Required]
         [Column(TypeName = "nvarchar(100)")]
         public string Address { get; set; }
-        [Required]
         [Column(TypeName = "varchar(100)")]
         public string Country { get; set; }
         [Required]
