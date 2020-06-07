@@ -25,6 +25,10 @@ namespace eRecept.Migrations.RecipeIngredientRepositoryMigrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Amount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("IngredientId")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");

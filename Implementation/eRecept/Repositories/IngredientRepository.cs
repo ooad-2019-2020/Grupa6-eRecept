@@ -30,6 +30,15 @@ namespace eRecept.Repositories
             //TODO: return ingredient by its id
             return this.Ingredients.Find(ingredientId);
         }
+        public Ingredient getIngredient(String ingredientName)
+        {
+
+            if (!this.Ingredients.Any(i => i.Title == ingredientName))
+                this.insertIngredient(new Ingredient(0, 1, ingredientName));
+            
+
+            return this.Ingredients.Where(i => i.Title == ingredientName).First();
+        }
 
         public void insertIngredient(Ingredient ingredient)
         {

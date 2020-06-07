@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,6 +12,7 @@ namespace eRecept.Models
     public class Recipe
     {
 
+
         public Recipe(int id, string title, string description, string mealType, string sideNote)
         {
             Id = id;
@@ -19,6 +21,8 @@ namespace eRecept.Models
             MealType = mealType;
             SideNote = sideNote;
         }
+
+
         [Key]
         public int Id { get; set; }
         [Required]
@@ -32,7 +36,9 @@ namespace eRecept.Models
         public string MealType { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         public string SideNote { get; set; }
- 
+        
+    
+
     }
 
 

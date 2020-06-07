@@ -1,7 +1,9 @@
 ﻿using eRecept.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,14 +27,7 @@ namespace eRecept.Repositories
             return new List<RecipeIngredient>(this.RecipeIngredients);
         }
 
-        public List<RecipeIngredientWrapper> getAllRecipesWithIngredients(List<Ingredient> ingredients)
-        {
-
-
-          //  this.RecipeIngredients.FromSqlRaw
-
-            return null;
-        }
+        
 
         public void addRecipeIngredient(RecipeIngredient recipeIngredient)
         {
@@ -49,6 +44,7 @@ namespace eRecept.Repositories
             this.SaveChanges();
 
         }
+
 
 
 

@@ -9,7 +9,7 @@ using eRecept.Repositories;
 namespace eRecept.Migrations.RecipeIngredientRepositoryMigrations
 {
     [DbContext(typeof(RecipeIngredientRepository))]
-    [Migration("20200607140838_RecipeIngredient")]
+    [Migration("20200607141843_RecipeIngredient")]
     partial class RecipeIngredient
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,6 +26,10 @@ namespace eRecept.Migrations.RecipeIngredientRepositoryMigrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Amount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("IngredientId")
                         .IsRequired()

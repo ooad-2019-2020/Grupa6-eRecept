@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace eRecept.Repositories
 
 
         public DbSet<Recipe> Recipes { get; set; }
+        //public DbSet<RecipeWrapper> RecipeWrapper { get; set; }
 
         public List<Recipe> getAllRecipes()
         {
@@ -25,6 +27,7 @@ namespace eRecept.Repositories
 
         public Recipe getRecipe(int id)
         {
+      
             return this.Recipes.Find(id);
             //TODO: return recipe by its id
         }
@@ -77,9 +80,6 @@ namespace eRecept.Repositories
             return 0;
 
         }
-
-
-
 
 
     }

@@ -30,14 +30,19 @@ namespace eRecept.Controllers
             return _recipeIngredientRepository.getAllRecipeIngredients();
         }
 
-        public List<RecipeIngredientWrapper> getAllRecipesWithIngredients(List<Ingredient> ingredients)
+        public List<RecipeWrapper> getAllRecipesWithIngredients(List<Ingredient> ingredients)
         {
 
-            //  this.RecipeIngredients.FromSqlRaw
 
+
+
+            //  return _recipeIngredientRepository.getAllRecipesWithIngredients(ingredients);
             return null;
+
         }
 
+
+       
 
 
 

@@ -12,11 +12,12 @@ namespace eRecept.Models
     {
 
 
-        public RecipeIngredient(int id,int recipeId,int ingredientId)
+        public RecipeIngredient(int id,int recipeId,int ingredientId, int amount)
         {
             Id = id;
             RecipeId = recipeId;
             IngredientId = ingredientId;
+            Amount = amount;
         }
 
         [Key]
@@ -27,7 +28,10 @@ namespace eRecept.Models
         [Required]
         [Column(TypeName = "nvarchar(100)")]
         public int IngredientId { get; set; }
-  
+        [Required]
+        [Column(TypeName = "nvarchar(100)")]
+        public int Amount { get; set; }
+
 
     }
 }

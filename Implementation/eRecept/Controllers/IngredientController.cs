@@ -36,6 +36,11 @@ namespace eRecept.Controllers
             return _ingredientRepository.getIngredient(ingredientId);
         }
 
+        public Ingredient getIngredient(String ingredientName)
+        {
+            return _ingredientRepository.getIngredient(ingredientName);
+        }
+
         public void deleteIngredient(int ingredientId)
         {
             _ingredientRepository.deleteIngredient(ingredientId);

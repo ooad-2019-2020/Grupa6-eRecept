@@ -13,7 +13,8 @@ namespace eRecept.Migrations.RecipeIngredientRepositoryMigrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RecipeId = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    IngredientId = table.Column<string>(type: "nvarchar(100)", nullable: false)
+                    IngredientId = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    Amount = table.Column<string>(type: "nvarchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
