@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eRecept.Controllers
 {
+
+    [Route("[controller]")]
+    [ApiController]
     public class RecipeController : Controller
     {
 
@@ -24,6 +27,7 @@ namespace eRecept.Controllers
             return View();
         }
 
+        [HttpGet]
         public List<Recipe> getAllRecipes()
         {
             //TODO: return all recipes
@@ -68,6 +72,27 @@ namespace eRecept.Controllers
         public int removeIngredient(int recipeId, int ingredientId)
         {
             return 0;
+        }
+
+        [HttpGet("setup")]
+        public void setup()
+        {
+            //id, title, dect,mealtype, sidenote
+            Recipe r = new Recipe(0,"Soup","Description on how to make this meal goes here","Appetizer","Great with bread");
+            this.saveRecipe(r);
+
+             r = new Recipe(0, "Fish", "Description on how to make this meal goes here", "Main course", "Watch out for bones");
+            this.saveRecipe(r);
+
+             r = new Recipe(0, "Cake", "Description on how to make this meal goes here", "Dessert", "Little more vanila extract for the flavor");
+            this.saveRecipe(r);
+
+            /* r = new Recipe(0, "Soup", "Description on how to make this meal goes here", "Appetizer", "Great with bread");
+            this.saveRecipe(r);
+
+             r = new Recipe(0, "Soup", "Description on how to make this meal goes here", "Appetizer", "Great with bread");
+            this.saveRecipe(r);*/
+
         }
 
     }

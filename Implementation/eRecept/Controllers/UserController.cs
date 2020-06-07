@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eRecept.Controllers
 {
+
+    [Route("[controller]")]
+    [ApiController]
     public class UserController : Controller
     {
 

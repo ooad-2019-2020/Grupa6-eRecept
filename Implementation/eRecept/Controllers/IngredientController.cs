@@ -33,7 +33,6 @@ namespace eRecept.Controllers
 
         public Ingredient getIngredient(int ingredientId)
         {
-
             return _ingredientRepository.getIngredient(ingredientId);
         }
 
@@ -44,11 +43,28 @@ namespace eRecept.Controllers
 
         public void saveIngredient(Ingredient ingredient)
         {
-
             _ingredientRepository.insertIngredient(ingredient);
-
-
         }
+
+
+        [HttpGet("setup")]
+        public void setup()
+        {
+            Ingredient i = new Ingredient(0, 5, "Eggs");
+            this.saveIngredient(i);
+            i = new Ingredient(0, 250, "Milk");
+            this.saveIngredient(i);
+            i = new Ingredient(0, 1000, "Meat");
+            this.saveIngredient(i);
+            i = new Ingredient(0, 4, "Apples");
+            this.saveIngredient(i);
+            i = new Ingredient(0, 1, "Fish");
+            this.saveIngredient(i);
+            i = new Ingredient(0, 250, "Chocolate");
+            this.saveIngredient(i);
+        }
+
+
 
     }
 }
