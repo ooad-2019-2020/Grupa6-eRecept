@@ -27,6 +27,10 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
+    if (this.authGuardService.isLoggedIn) {
+      this.router.navigate([""]);
+    }
+
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
@@ -47,15 +51,16 @@ export class LoginComponent implements OnInit {
 
     //TODO: vidjeti sa backendom je l postoji user i pw ovaj
     this.loading = true;
-
+    const url = "http://localhost:51943/user/login?username=" + this.loginForm.value['username'] + "&password=" + this.loginForm.value['password'];
     this.httpClient
-      .get("localhost:4200/account/login?username=" + this.loginForm.value['username'] + "&password=" + this.loginForm.value['password'])
+      .post(url, null)
       .subscribe(
         (data: boolean) => {
           this.authGuardService.isLoggedIn = data;
           if (data === true) {
             this.router.navigate([""]);
           }
+          this.loading = false;
         },
         error => {
           console.log(error);

@@ -16,7 +16,6 @@ namespace eRecept
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            System.Diagnostics.Debug.WriteLine("Ovdje now");
         }
 
         public IConfiguration Configuration { get; }
@@ -24,8 +23,12 @@ namespace eRecept
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowMyOrigin",
+                builder => builder.WithOrigins("localhost:51943").WithMethods("PUT", "DELETE", "GET", "POST"));
+            });
+            services.AddRouting(r => r.SuppressCheckForUnhandledSecurityMetadata = true);
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -52,7 +55,12 @@ namespace eRecept
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
+            app.UseCors();
+            app.Use((context, next) =>
+            {
+                context.Items["__CorsMiddlewareInvoked"] = true;
+                return next();
+            });
             System.Console.Write("Am here");
 
             if (env.IsDevelopment())

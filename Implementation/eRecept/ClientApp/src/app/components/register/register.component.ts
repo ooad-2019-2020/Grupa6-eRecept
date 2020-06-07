@@ -39,22 +39,24 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // reset alerts on submit
-
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
     }
 
 
-    //TODO: vidjeti sa backendom je l postoji user i pw ovaj
     this.loading = true;
-
+    const url = "http://localhost:51943/user/register?username=" + this.registerForm.value['username']
+                                                      + "&email=" + this.registerForm.value["email"]
+                                                      + "&password=" + this.registerForm.value['password']
+                                                      + "&repeatPassword=" + this.registerForm.value['repeatpassword'];
     this.httpClient
-      .get("localhost:4200/account/register?username=" + this.registerForm.value['username'] + "&email=" + this.registerForm.value["email"] + "&password=" + this.registerForm.value['password'])
+      .post(url, null)
       .subscribe(
-        data => {
-          console.log(data);
+        (data: boolean) => {
+          if (data === true) {
+            this.router.navigate(["login"]);
+          }
         },
         error => {
           console.log(error);
