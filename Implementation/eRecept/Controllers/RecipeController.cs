@@ -20,12 +20,14 @@ namespace eRecept.Controllers
         private readonly RecipeRepository _recipeRepository;
         private readonly RecipeIngredientRepository _recipeIngredientRepository;
         private readonly IngredientRepository _ingredientRepository;
+        private readonly SavedRecipesRepository _savedRecipes;
 
-        public RecipeController(RecipeRepository recipeRepository, RecipeIngredientRepository recipeIngredientRepository, IngredientRepository ingredientRepository)
+        public RecipeController(RecipeRepository recipeRepository, RecipeIngredientRepository recipeIngredientRepository, IngredientRepository ingredientRepository, SavedRecipesRepository savedRecipes)
         {
             _recipeRepository = recipeRepository;
             _recipeIngredientRepository = recipeIngredientRepository;
             _ingredientRepository = ingredientRepository;
+            _savedRecipes = savedRecipes;
         }
 
     
@@ -78,13 +80,25 @@ namespace eRecept.Controllers
 
         public List<Recipe> getSavedRecipes(int userId)
         {
-            //TODO: get saved recipes of a specific user
-            // _recipeRepository.deleteRecipe(id);
-            return null;
+
+
+            List<SavedRecipes> tempList= _savedRecipes.getAllRecipeIngredients();
+
+            List<Recipe> returnList = new List<Recipe>();
+
+            foreach(SavedRecipes sr in tempList)
+            {
+                returnList.Add(getRecipe(sr.RecipeId));
+            }
+            return returnList;
+
         }
 
+        [HttpGet("save")]
         public int saveRecipeForUser(int userId, int recipeId)
         {
+            //todo use local userid variable
+            _savedRecipes.saveRecipe(new SavedRecipes(0,userId, recipeId));
             return 0;
         }
 
