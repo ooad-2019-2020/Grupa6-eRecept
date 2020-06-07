@@ -51,6 +51,7 @@ namespace eRecept.Controllers
             _ingredientRepository.insertIngredient(ingredient);
         }
 
+       
 
         [HttpGet("setup")]
         public void setup()

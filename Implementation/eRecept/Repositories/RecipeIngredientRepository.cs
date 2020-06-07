@@ -18,15 +18,12 @@ namespace eRecept.Repositories
         {
         }
 
-       // RecipeIngredientRepository() { }
-
         public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
 
         public List<RecipeIngredient> getAllRecipeIngredients()
         {
             return new List<RecipeIngredient>(this.RecipeIngredients);
         }
-
         
 
         public void addRecipeIngredient(RecipeIngredient recipeIngredient)
@@ -36,6 +33,7 @@ namespace eRecept.Repositories
             this.SaveChanges();
 
         }
+      
 
         public void removeRecipe(int recipeId)
         {
@@ -44,6 +42,8 @@ namespace eRecept.Repositories
             this.SaveChanges();
 
         }
+
+     
 
 
 

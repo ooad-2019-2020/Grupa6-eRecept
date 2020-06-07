@@ -1,4 +1,5 @@
 ﻿using eRecept.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace eRecept.Repositories
 
         public DbSet<Ingredient> Ingredients { get; set; }
 
-
+        [HttpGet]
         public List<Ingredient> getAllIngredients()
         {
             //TODO: return all ingredients from database

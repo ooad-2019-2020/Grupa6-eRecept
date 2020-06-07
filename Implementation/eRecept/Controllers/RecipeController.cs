@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using eRecept.Models;
@@ -48,6 +49,21 @@ namespace eRecept.Controllers
             return _recipeRepository.getRecipe(id);
         }
 
+        [HttpGet("getIngredients")]
+        public List<IngredientWrapper> getIngredients(int id=-1)
+        {
+            if (id <0) return null;
+
+            List<RecipeIngredient> temp = _recipeIngredientRepository.getAllRecipeIngredients();
+            List<IngredientWrapper> returnList = new List<IngredientWrapper>();
+
+            foreach (RecipeIngredient rp in temp)
+                if (rp.IngredientId == id) returnList.Add(new IngredientWrapper(_ingredientRepository.getIngredient(rp.IngredientId).Title, rp.Amount));
+
+            return returnList;
+
+        }
+
         public void deleteRecipe(int id)
         {
             //TODO: delete recipe using its id
@@ -94,7 +110,7 @@ namespace eRecept.Controllers
             this.addIngredient(r.Id,_ingredientRepository.getIngredient("Meat").Id,1);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Eggs").Id, 1);
 
-            r = new Recipe(0, "Fish", "Description on how to make this meal goes here", "Main course", "Watch out for bones");
+            r = new Recipe(0, "Fish", "Description on how to make this meal goes here", "MainCourse", "Watch out for bones");
             this.saveRecipe(r);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Meat").Id, 2);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Fish").Id, 1);
@@ -105,7 +121,7 @@ namespace eRecept.Controllers
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Eggs").Id, 1);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Chocolate").Id, 1);
 
-            r=new Recipe(0, " Cheeseburger", "Description on how to make this meal goes here","Main course","Beeschusger");
+            r=new Recipe(0, " Cheeseburger", "Description on how to make this meal goes here","MainCourse","Beeschusger");
             this.saveRecipe(r);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Cheese").Id, 2);
             this.addIngredient(r.Id, _ingredientRepository.getIngredient("Ketchup").Id, 1);
@@ -115,33 +131,92 @@ namespace eRecept.Controllers
 
         }
 
+        [HttpGet("getDaily")]
+        public Recipe getDaily()
+        {
+            Random r = new Random();
+
+            List<Recipe> recipes = _recipeRepository.getAllRecipes();
+
+            if (recipes.Count == 0) return null;
+            return recipes[r.Next(recipes.Count)];
+
+        }
+
+        [HttpGet("getBest")]
+        public Recipe getBest()
+        {
+            Random r = new Random();
+
+            List<Recipe> recipes = _recipeRepository.getAllRecipes();
+
+            if (recipes.Count == 0) return null;
+            return recipes[r.Next(recipes.Count)];
+
+        }
+
+        [HttpGet("getOther")]
+        public List<Recipe> getOther(int page = 1)
+        {
+            Random r = new Random();
+
+            List<Recipe> recipes = _recipeRepository.getAllRecipes();
+
+            List<Recipe> returnRecipes = new List<Recipe>();
+
+            page--;
+            for (int i = page * 6; i < (page + 1) * 6 && i<recipes.Count; i++)
+                returnRecipes.Add(recipes[i]);
+
+            return returnRecipes;
+
+
+        }
+
 
         [HttpGet("few")]
-        public List<RecipeWrapper> getFew()
+        public List<RecipeWrapper> getFew(string list)//[FromUri] List<String> ing = null,int page = 1, string mealType = "NO", int missingMax = 0
         {
+
+
+
             List<Ingredient> ingredients = new List<Ingredient>();
-            ingredients.Add(_ingredientRepository.getIngredient("Meat"));
-            ingredients.Add(_ingredientRepository.getIngredient("Eggs"));
 
             List<Recipe> recipes = _recipeRepository.getAllRecipes();
 
             List<RecipeWrapper> suggestedRecipes = new List<RecipeWrapper>();
 
-            foreach(Recipe recipe in recipes)
+            if (list == null)
             {
-                int ingredientCount = _recipeIngredientRepository.RecipeIngredients.Count(p => p.RecipeId == recipe.Id);
-                int matchedIngredientCount = 0;
-                foreach(Ingredient ingredient in ingredients)
+
+                foreach(Recipe r in recipes)
                 {
-                    bool found = _recipeIngredientRepository.RecipeIngredients.Any(p => p.RecipeId == recipe.Id && p.IngredientId == ingredient.Id);
-                    if (found) matchedIngredientCount++;
+                    suggestedRecipes.Add(new RecipeWrapper(r, 0));
                 }
-                if(matchedIngredientCount > 0)
-                {
-                    RecipeWrapper recipeWrapper = new RecipeWrapper(recipe, ingredientCount - matchedIngredientCount);
-                    suggestedRecipes.Add(recipeWrapper);
-                }
+                return suggestedRecipes;
             }
+
+   
+            foreach (string name in list.Split(','))
+                ingredients.Add(_ingredientRepository.getIngredient(name));
+                
+                
+                foreach (Recipe recipe in recipes)
+                {
+                    int ingredientCount = _recipeIngredientRepository.RecipeIngredients.Count(p => p.RecipeId == recipe.Id);
+                    int matchedIngredientCount = 0;
+                    foreach (Ingredient ingredient in ingredients)
+                    {
+                        bool found = _recipeIngredientRepository.RecipeIngredients.Any(p => p.RecipeId == recipe.Id && p.IngredientId == ingredient.Id);
+                        if (found) matchedIngredientCount++;
+                    }
+                    if (matchedIngredientCount > 0)
+                    {
+                        RecipeWrapper recipeWrapper = new RecipeWrapper(recipe, ingredientCount - matchedIngredientCount);
+                        suggestedRecipes.Add(recipeWrapper);
+                    }
+                }
+
             return suggestedRecipes;
 
 
