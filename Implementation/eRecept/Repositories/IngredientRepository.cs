@@ -7,53 +7,35 @@ using System.Threading.Tasks;
 
 namespace eRecept.Repositories
 {
+    [System.ComponentModel.DataAnnotations.Schema.Table("Ingredients")]
     public class IngredientRepository:DbContext
     {
-
-        private static IngredientRepository instance = null;
-        private static readonly object padlock = new object();
-
-        IngredientRepository() { }
-
         public IngredientRepository(DbContextOptions<IngredientRepository> options) : base(options)
         {
-
         }
+
         public DbSet<Ingredient> Ingredients { get; set; }
-
-
-        public static IngredientRepository Instance
-        {
-            get
-            {
-                lock (padlock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new IngredientRepository();
-                    }
-                    return instance;
-                }
-            }
-        }
-
 
 
         public List<Ingredient> getAllIngredients()
         {
-            List<Ingredient> returnList = new List<Ingredient>();
             //TODO: return all ingredients from database
-            return returnList;
+            return new List<Ingredient>(this.Ingredients);        
         }
 
         public Ingredient getIngredient(int ingredientId)
         {
             //TODO: return ingredient by its id
-            return null;
+            return this.Ingredients.Find(ingredientId);
         }
 
         public void insertIngredient(Ingredient ingredient)
         {
+
+            this.Add(ingredient);
+            this.SaveChanges();
+
+            //this.Ingredients.Add(ingredient);
             //TODO: insert ingredient into the database
         }
 
@@ -61,16 +43,21 @@ namespace eRecept.Repositories
         {
             //TODO: add all ingredients
             //maybe this
-            foreach (Ingredient i in ingredients) insertIngredient(i);
+            foreach (Ingredient i in ingredients) this.Add(i);
+            this.SaveChanges();
         }
 
         public void deleteIngredient(int ingredientId)
         {
+            this.Remove(ingredientId);
+            this.SaveChanges();
             //TODO: delete ingredient from database by its id
         }
 
         public void updateIngredient(Ingredient ingredient)
         {
+            this.updateIngredient(ingredient);
+            this.SaveChanges();
             //TODO: update ingredient from database
         }
 

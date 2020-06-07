@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace eRecept.Repositories
 {
+    [System.ComponentModel.DataAnnotations.Schema.Table("Users")]
     public class UserRepository:DbContext
     {
-
-        private static UserRepository instance = null;
-        private static readonly object padlock = new object();
 
         UserRepository() { }
 
@@ -24,46 +22,32 @@ namespace eRecept.Repositories
 
 
 
-        public static UserRepository Instance
-        {
-            get
-            {
-                lock (padlock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new UserRepository();
-                    }
-                    return instance;
-                }
-            }
-        }
-
         public List<User> getAllUsers()
         {
-            List<User> returnList = new List<User>();
-            //TODO: get all users from database
-            return returnList;
+            return new List<User>(this.Users);
         }
 
         public User getUser(int id)
         {
-            //TODO: get a user from the database by its id
-            return null;
+            return this.Users.Find(id);
         }
 
         public void insertUser(User user)
         {
+
+            this.Add(user);
             //TODO: insert a user to the database
         }
 
         public void deleteUser(int id)
         {
+            this.Remove(id);
             //TODO: delete a specific user from database
         }
 
         public void updateUser(User user)
         {
+            this.Update(user);
             //TODO: update the user by its id
         }
 

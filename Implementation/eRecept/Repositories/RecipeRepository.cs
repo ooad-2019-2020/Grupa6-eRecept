@@ -7,63 +7,45 @@ using System.Threading.Tasks;
 
 namespace eRecept.Repositories
 {
+    [System.ComponentModel.DataAnnotations.Schema.Table("Recipes")]
     public class RecipeRepository:DbContext
     {
 
-        private static RecipeRepository instance = null;
-        private static readonly object padlock = new object();
-
-        RecipeRepository() { }
-
-
         public RecipeRepository(DbContextOptions<RecipeRepository> options) : base(options)
         {
-
         }
+
 
         public DbSet<Recipe> Recipes { get; set; }
 
-
-        public static RecipeRepository Instance
-        {
-            get
-            {
-                lock (padlock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new RecipeRepository();
-                    }
-                    return instance;
-                }
-            }
-        }
-
-
         public List<Recipe> getAllRecipes()
         {
-            //TODO: return all recipes from database
-            return null;
+             return new List<Recipe>(this.Recipes);
         }
 
         public Recipe getRecipe(int id)
         {
+            return this.Recipes.Find(id);
             //TODO: return recipe by its id
-            return null;
         }
 
         public void insertRecipe(Recipe recipe)
         {
+
+            this.Add(recipe);
+
             //TODO: insert recipe into the database
         }
 
         public void deleteRecipe(int id)
         {
+            this.Remove(id);
             //TODO: delete recipe from database using its id
         }
 
         public void updateRecipe(Recipe recipe)
         {
+            this.Update(recipe);
             //TODO: update recipe using its id
         }
 

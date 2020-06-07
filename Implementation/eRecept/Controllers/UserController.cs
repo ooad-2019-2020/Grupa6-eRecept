@@ -3,12 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eRecept.Models;
+using eRecept.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eRecept.Controllers
 {
     public class UserController : Controller
     {
+
+        private readonly UserRepository _userRepository;
+
+        public UserController(UserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
+
         public IActionResult Index()
         {
             return View();
@@ -16,29 +26,25 @@ namespace eRecept.Controllers
 
         public List<User> getAllUsers()
         {
-            List<User> returnList = new List<User>();
-            returnList = Repositories.UserRepository.Instance.getAllUsers();
-            //TODO: get all users
-            return returnList;
+            return _userRepository.getAllUsers();
         }
 
         public User getUser(int id)
         {
             //TODO: get a user by its id
-            User returnUser = Repositories.UserRepository.Instance.getUser(id);
-            return returnUser;
+            return _userRepository.getUser(id);
         }
 
         public void deleteUser(int id)
         {
-             Repositories.UserRepository.Instance.deleteUser(id);
             //TODO: delete a specific user from database
+             _userRepository.deleteUser(id);
         }
 
         public void saveUser(User user)
         {
-             Repositories.UserRepository.Instance.updateUser(user);
             //TODO: save the user
+            _userRepository.insertUser(user);
         }
 
 

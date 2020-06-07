@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using eRecept.Repositories;
 
 namespace eRecept
 {
@@ -15,6 +16,7 @@ namespace eRecept
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            System.Diagnostics.Debug.WriteLine("Ovdje now");
         }
 
         public IConfiguration Configuration { get; }
@@ -22,6 +24,8 @@ namespace eRecept
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -33,16 +37,23 @@ namespace eRecept
                 options.UseSqlServer(Configuration.GetConnectionString("DevConnection1")));
 
             services.AddDbContext<Repositories.IngredientRepository>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DevConnection2")));
+                options.UseSqlServer(Configuration.GetConnectionString("DevConnection1")));
 
             services.AddDbContext<Repositories.RecipeRepository>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DevConnection3")));
+                options.UseSqlServer(Configuration.GetConnectionString("DevConnection1")));
+
+
+
+          
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            System.Console.Write("Am here");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
