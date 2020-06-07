@@ -32,7 +32,7 @@
     </fieldset>
     <mat-form-field class="example-form-field" style="margin-left: 20px">
       <mat-label>Message</mat-label>
-      <input matInput type="text" [(ngModel)]="feedbackMessage">
+      <input matInput type="text" [value]="feedbackMessage" (input)="feedbackMessage = $event.target.value">
     </mat-form-field>
     <button class="btn btn-primary" style="float:right" (click)="onSubmitFeedback()">Submit</button>
 
