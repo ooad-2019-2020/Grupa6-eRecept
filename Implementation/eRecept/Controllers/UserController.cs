@@ -51,7 +51,7 @@ namespace eRecept.Controllers
         }
 
 
-        [HttpPost("/login")]
+        [HttpPost("login")]
         public bool CheckUser(string username, string password)
         {
             List<User> allUsers = getAllUsers();
@@ -66,7 +66,7 @@ namespace eRecept.Controllers
             return false;
         }
 
-        [HttpPost("/register")]
+        [HttpPost("register")]
         public bool CheckRegister(string username, string email, string password, string repeatPassword)
         {
             List<User> allUsers = getAllUsers();
