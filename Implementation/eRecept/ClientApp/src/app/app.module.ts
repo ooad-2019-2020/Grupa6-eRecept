@@ -54,7 +54,7 @@ import { MatSelectModule } from '@angular/material';
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'search', component: SearchComponent, canActivate: [AuthGuardService] },
-      { path: 'recipeInfo', component: SearchComponent, canActivate: [AuthGuardService] }
+      { path: 'recipeInfo', component: RecipeinfoComponent  , canActivate: [AuthGuardService] }
     ]),
     BrowserAnimationsModule
   ],

@@ -6,7 +6,7 @@ import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/ro
 })
 export class AuthGuardService implements CanActivate {
 
-  public isLoggedIn = false;
+  public isLoggedIn = true;
 
   constructor(
     private router: Router
