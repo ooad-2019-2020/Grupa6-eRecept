@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using eRecept.Models;
 using eRecept.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eRecept.Controllers
 {
@@ -79,6 +80,8 @@ namespace eRecept.Controllers
 
         public int removeIngredient(int recipeId, int ingredientId)
         {
+            String query = "Delete from RecipeIngredients where recipeId=" + recipeId + " and ingredientId" + ingredientId;
+            _recipeIngredientRepository.RecipeIngredients.FromSqlRaw(query);
             return 0;
         }
 
