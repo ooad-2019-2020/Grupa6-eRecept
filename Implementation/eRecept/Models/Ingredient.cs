@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,20 +9,19 @@ namespace eRecept.Models
 {
     public class Ingredient
     {
-
-        private int id;
-        private int amount;
-        private string title;
-
         public Ingredient(int id, int amount, string title)
         {
-            this.id = id;
-            this.amount = amount;
-            this.title = title;
+            Id = id;
+            Amount = amount;
+            Title = title;
         }
-
-        public int Id { get => id; set => id = value; }
-        public int Amount { get => amount; set => amount = value; }
-        public string Title { get => title; set => title = value; }
+        [Key]
+        public int Id { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(5)")]
+        public int Amount { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(100)")] 
+        public string Title { get; set; }
     }
 }

@@ -1,9 +1,12 @@
+using eRecept.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace eRecept
 {
@@ -25,6 +28,16 @@ namespace eRecept
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddDbContext<Repositories.UserRepository>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("DevConnection1")));
+
+            services.AddDbContext<Repositories.IngredientRepository>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DevConnection2")));
+
+            services.AddDbContext<Repositories.RecipeRepository>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DevConnection3")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

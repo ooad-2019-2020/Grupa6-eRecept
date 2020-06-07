@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,35 +10,37 @@ namespace eRecept.Models
 {
     public class User
     {
-
-        private int userId;
-        private string name;
-        private string lastName;
-        private string mail;
-        private string address;
-        private string country;
-        private int userRole;
-        private List<Recipe> savedRecipes;
-
-        public User(int userId, string name, string lastName, string mail, string address, string country, int userRole, List<Recipe> savedRecipes)
+        public User(int userId, string name, string lastName, string mail, string address, string country, int userRole)
         {
-            this.userId = userId;
-            this.name = name;
-            this.lastName = lastName;
-            this.mail = mail;
-            this.address = address;
-            this.country = country;
-            this.userRole = userRole;
-            this.savedRecipes = savedRecipes;
+            UserId = userId;
+            Name = name;
+            LastName = lastName;
+            Mail = mail;
+            Address = address;
+            Country = country;
+            UserRole = userRole;
+            //SavedRecipes = savedRecipes;
         }
-
-        public int UserId { get => userId; set => userId = value; }
-        public string Name { get => name; set => name = value; }
-        public string LastName { get => lastName; set => lastName = value; }
-        public string Mail { get => mail; set => mail = value; }
-        public string Address { get => address; set => address = value; }
-        public string Country { get => country; set => country = value; }
-        public int UserRole { get => userRole; set => userRole = value; }
-        public List<Recipe> SavedRecipes { get => savedRecipes; set => savedRecipes = value; }
+        [Key]
+        public int UserId { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(100)")]
+        public string Name { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(100)")]
+        public string LastName { get; set; }
+        [Required]
+        [Column(TypeName = "nvarchar(100)")]
+        public string Mail { get; set; }
+        [Required]
+        [Column(TypeName = "nvarchar(100)")]
+        public string Address { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(100)")]
+        public string Country { get; set; }
+        [Required]
+        [Column(TypeName = "nvarchar(1)")]
+        public int UserRole { get; set; }
+       // public List<Recipe> SavedRecipes { get; set; }
     }
 }

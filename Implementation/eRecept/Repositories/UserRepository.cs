@@ -1,4 +1,5 @@
 ﻿using eRecept.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +7,22 @@ using System.Threading.Tasks;
 
 namespace eRecept.Repositories
 {
-    public class UserRepository
+    public class UserRepository:DbContext
     {
 
         private static UserRepository instance = null;
         private static readonly object padlock = new object();
 
         UserRepository() { }
+
+        public UserRepository(DbContextOptions<UserRepository> options) : base(options)
+        {
+
+        }
+
+        public DbSet<User> Users { get; set; }
+
+
 
         public static UserRepository Instance
         {
@@ -44,7 +54,7 @@ namespace eRecept.Repositories
 
         public void insertUser(User user)
         {
-           //TODO: insert a user to the database
+            //TODO: insert a user to the database
         }
 
         public void deleteUser(int id)

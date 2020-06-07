@@ -1,4 +1,5 @@
 ﻿using eRecept.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +7,20 @@ using System.Threading.Tasks;
 
 namespace eRecept.Repositories
 {
-    public class IngredientRepository
+    public class IngredientRepository:DbContext
     {
 
         private static IngredientRepository instance = null;
         private static readonly object padlock = new object();
 
         IngredientRepository() { }
+
+        public IngredientRepository(DbContextOptions<IngredientRepository> options) : base(options)
+        {
+
+        }
+        public DbSet<Ingredient> Ingredients { get; set; }
+
 
         public static IngredientRepository Instance
         {
@@ -61,7 +69,7 @@ namespace eRecept.Repositories
             //TODO: delete ingredient from database by its id
         }
 
-        public void updateIngredient (Ingredient ingredient)
+        public void updateIngredient(Ingredient ingredient)
         {
             //TODO: update ingredient from database
         }

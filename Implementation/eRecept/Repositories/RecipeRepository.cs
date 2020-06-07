@@ -1,4 +1,5 @@
 ﻿using eRecept.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +7,22 @@ using System.Threading.Tasks;
 
 namespace eRecept.Repositories
 {
-    public class RecipeRepository
+    public class RecipeRepository:DbContext
     {
 
-        private static RecipeRepository instance=null;
+        private static RecipeRepository instance = null;
         private static readonly object padlock = new object();
 
         RecipeRepository() { }
+
+
+        public RecipeRepository(DbContextOptions<RecipeRepository> options) : base(options)
+        {
+
+        }
+
+        public DbSet<Recipe> Recipes { get; set; }
+
 
         public static RecipeRepository Instance
         {
