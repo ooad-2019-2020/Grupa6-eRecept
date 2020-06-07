@@ -18,7 +18,6 @@ namespace eRecept.Repositories
 
 
         public DbSet<Recipe> Recipes { get; set; }
-        //public DbSet<RecipeWrapper> RecipeWrapper { get; set; }
 
         public List<Recipe> getAllRecipes()
         {

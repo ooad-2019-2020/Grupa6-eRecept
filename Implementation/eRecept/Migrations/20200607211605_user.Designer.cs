@@ -9,8 +9,8 @@ using eRecept.Repositories;
 namespace eRecept.Migrations
 {
     [DbContext(typeof(UserRepository))]
-    [Migration("20200607153229_UserMigration")]
-    partial class UserMigration
+    [Migration("20200607211605_user")]
+    partial class user
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,22 +10,32 @@ namespace eRecept.Models
     public class Feedback
     {
 
-        private int userId;
-        private int recipeId;
-        private int rating;
-        private string comment;
+     
 
-        public Feedback(int userId, int recipeId, int rating, string comment)
+        public Feedback(int id,int userId, int recipeId, int rating, string comment)
         {
-            this.userId = userId;
-            this.recipeId = recipeId;
-            this.rating = rating;
-            this.comment = comment;
+
+            Id = id;
+            UserId = userId;
+            RecipeId = recipeId;
+            Rating = rating;
+            Comment = comment;
         }
 
-        public int UserId { get => userId; set => userId = value; }
-        public int RecipeId { get => recipeId; set => recipeId = value; }
-        public int Rating { get => rating; set => rating = value; }
-        public string Comment { get => comment; set => comment = value; }
+        [Key]
+        public int Id { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(5)")]
+        public int RecipeId { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(5)")]
+        public int UserId { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(5)")]
+        public int Rating { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(100)")]
+        public string Comment { get; set; }
+
     }
 }
