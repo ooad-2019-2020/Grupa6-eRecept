@@ -19,6 +19,9 @@ import {MatListModule} from '@angular/material/list';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { SearchComponent } from './components/search/search.component';
+import { RecipeinfoComponent } from './components/recipeinfo/recipeinfo.component';
+import { MatSelectModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { AuthGuardService } from './services/auth-guard.service';
     SideNavComponent,
     RegisterComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SearchComponent,
+    RecipeinfoComponent
     //CounterComponent,
     //FetchDataComponent
   ],
@@ -42,13 +47,14 @@ import { AuthGuardService } from './services/auth-guard.service';
     MatIconModule,
     MatGridListModule,
     MatToolbarModule,
+    MatSelectModule,
     MatSidenavModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuardService] },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      //{ path: 'counter', component: CounterComponent },
-      //{ path: 'fetch-data', component: FetchDataComponent },
+      { path: 'search', component: SearchComponent, canActivate: [AuthGuardService] },
+      { path: 'recipeInfo', component: SearchComponent, canActivate: [AuthGuardService] }
     ]),
     BrowserAnimationsModule
   ],
